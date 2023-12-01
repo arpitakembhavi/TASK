@@ -1,0 +1,108 @@
+1)Write a Selenium script that opens the Firefox browser, maximizes the browser window, navigates to "http://google.com", prints the URL of the current page, reloads the page, and closes the browser.
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+  public class SeleniumScript {
+    public static void main(String[] args) {
+        // Set up the path to the geckodriver executable from your local system
+        System.setProperty("webdriver.chrome.driver", "D://driver//chromedriver.exe");
+
+        // Create a new instance of the Firefox driver
+        WebDriver driver = new FirefoxDriver();
+
+        try {
+            // Maximize the browser window
+            driver.manage().window().maximize();
+
+            // Navigate to "http://google.com"
+            driver.get("http://google.com");
+
+            // Print the URL of the current page
+            System.out.println("Current URL: " + driver.getCurrentUrl());
+
+            // Reload the page
+            driver.navigate().refresh();
+
+        } finally {
+            // Close the browser window
+            driver.quit();
+        }
+    }
+}
+
+2)Write a Selenium script that opens the Chrome browser, navigates to "https://www.demoblaze.com", maximizes the browser window, verifies if the title of the page is "STORE", and prints "Page landed on correct website" if the title matches, else prints "Page not landed on correct website".
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class SeleniumScript {
+    public static void main(String[] args) {
+        // Set the path to the chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "D://driver//chromedriver.exe");
+
+        // Create a new instance of the Chrome driver
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            // Navigate to "https://www.demoblaze.com"
+            driver.get("https://www.demoblaze.com");
+
+            // Maximize the browser window
+            driver.manage().window().maximize();
+
+            // Verify if the title is "STORE"
+            String pageTitle = driver.getTitle();
+            if (pageTitle.equals("STORE")) {
+                System.out.println("Page landed on correct website");
+            } else {
+                System.out.println("Page not landed on correct website");
+            }
+
+        } finally {
+            // Close the browser window
+            driver.quit();
+        }
+    }
+}
+
+3)Write a Selenium script that opens the chrome browser, navigates to "https://www.wikipedia.org/", maximizes the browser window, searches for the query "Artificial Intelligence", clicks on the "History" section in the search results, and prints the title of the section.
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class WikipediaSearch {
+    public static void main(String[] args) {
+        // Set the path to the chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "https://www.demoblaze.com");
+
+        // Create a new instance of the Chrome driver
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            // Navigate to "https://www.wikipedia.org/"
+            driver.get("https://www.wikipedia.org/");
+
+            // Maximize the browser window
+            driver.manage().window().maximize();
+
+            // Find the search input element and enter the query "Artificial Intelligence"
+            WebElement searchInput = driver.findElement(By.name("search"));
+            searchInput.sendKeys("Artificial Intelligence");
+            searchInput.submit();
+
+            // Click on the "History" section in the search results
+            WebElement historyLink = driver.findElement(By.xpath("//a[text()='History']"));
+            historyLink.click();
+
+            // Print the title of the section
+            System.out.println("Title of the 'History' section: " + driver.getTitle());
+
+        } finally {
+            // Close the browser window
+            driver.quit();
+        }
+    }
+}
